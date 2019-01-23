@@ -10,16 +10,21 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.apache.http.protocol.HTTP.USER_AGENT;
 
 public class HttpClientHelper {
 
-    public static HttpResponse get(String endpointUrl, String parameters){
-       //TODO: написать метод для GET запроса с хедерами по умолчанию
-       return null;
+    public static HttpResponse get(String endpointUrl, String parameters) throws IOException {
+      //Done
+        Map<String, String> headers=new HashMap<>();
+        headers.put("User-Agent", "My-Test-User-Agent");
+       return get(endpointUrl, parameters, headers);
     }
+
+
 
     //REST GET запрос
     public static HttpResponse get(String endpointUrl, String parameters, Map<String, String> headers) throws IOException {
@@ -41,9 +46,12 @@ public class HttpClientHelper {
     }
 
 
-    public static HttpResponse post(String endpointUrl, String parameters){
+    public static HttpResponse post(String endpointUrl, String parameters) throws IOException {
         //TODO: написать метод для POST запроса с хедерами по умолчанию
-        return null;
+        Map<String, String> headers=new HashMap<>();
+        headers.put("User-Agent", "My-Test-User-Agent");
+        String requestBody="{\"name\": \"morpheus\",\"job\": \"leader\"}";
+        return post(endpointUrl, requestBody, headers );
     }
 
     public static HttpResponse post(String endpointUrl, String body, Map<String, String> headers) throws IOException{
