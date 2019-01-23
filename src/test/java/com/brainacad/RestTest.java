@@ -1,9 +1,11 @@
 package com.brainacad;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPatch;
 import org.junit.Assert;
 import org.junit.Test;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,6 +118,23 @@ public class RestTest{
         Assert.assertEquals("Response status code should be 200", 200, statusCode);
         Assert.assertEquals("First name should be Janet","Janet",JsonUtils.stringFromJSONByPath(body,"$.data.first_name"));
         Assert.assertEquals("Last name should be Weaver","Weaver",JsonUtils.stringFromJSONByPath(body,"$.data.last_name"));
+
+    }
+
+    @Test
+    public void UPDATE() throws IOException {
+        String endpoint="/api/users/2";
+        String patchBody="{\"name\": \"morpheus\",\"job\": \"leader\"}";
+        HttpResponse patch = HttpClientHelper.patch(URL + endpoint, patchBody);
+
+        //Конвертируем входящий поток тела ответа в строку
+        String body=HttpClientHelper.getBodyFromResponse( patch);
+        System.out.println(body);
+        int statusCode = ( patch).getStatusLine().getStatusCode();
+        Assert.assertEquals("Response status code should be 200", 200, statusCode);
+        String dateStr=JsonUtils.stringFromJSONByPath(body,"$.updatedAt");
+        Date date=dateStr //|сконвертировать к данным
+        Assert.assertEquals("Name should be zion morpheus","morpheus",JsonUtils.stringFromJSONByPath(body,"$.updatedAt"));
 
     }
 }
