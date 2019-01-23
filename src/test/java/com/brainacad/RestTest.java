@@ -101,4 +101,21 @@ public class RestTest{
     //TODO: напишите по тесткейсу на каждый вариант запроса на сайте https://reqres.in
     //TODO: в тескейсах проверьте Result Code и несколько параметров из JSON ответа (если он есть)
 
+    @Test//GET метод
+    public void SingleUser() throws IOException {
+        String endpoint="/api/users/2";
+
+        //Выполняем REST GET запрос с нашими параметрами
+        // и сохраняем результат в переменную response.
+        HttpResponse response = HttpClientHelper.get(URL+endpoint, null);
+
+
+
+        //Конвертируем входящий поток тела ответа в строку
+        String body=HttpClientHelper.getBodyFromResponse(response);
+        System.out.println(body);
+        Assert.assertNotEquals("Body shouldn't be null", null, body);
+
+
+    }
 }
