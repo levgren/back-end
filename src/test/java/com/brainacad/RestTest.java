@@ -114,8 +114,9 @@ public class RestTest{
         //Конвертируем входящий поток тела ответа в строку
         String body=HttpClientHelper.getBodyFromResponse(response);
         System.out.println(body);
-        Assert.assertNotEquals("Body shouldn't be null", null, body);
-
+        int statusCode = response.getStatusLine().getStatusCode();
+        Assert.assertEquals("Response status code should be 200", 200, statusCode);
+        Assert.assertEquals("First name should be Jannet","Jannet",JsonUtils.stringFromJSONByPath(body,"$.data.first_name"));
 
     }
 }
