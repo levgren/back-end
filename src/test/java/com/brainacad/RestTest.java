@@ -109,14 +109,13 @@ public class RestTest{
         // и сохраняем результат в переменную response.
         HttpResponse response = HttpClientHelper.get(URL+endpoint, null);
 
-
-
         //Конвертируем входящий поток тела ответа в строку
         String body=HttpClientHelper.getBodyFromResponse(response);
         System.out.println(body);
         int statusCode = response.getStatusLine().getStatusCode();
         Assert.assertEquals("Response status code should be 200", 200, statusCode);
-        Assert.assertEquals("First name should be Jannet","Jannet",JsonUtils.stringFromJSONByPath(body,"$.data.first_name"));
+        Assert.assertEquals("First name should be Janet","Janet",JsonUtils.stringFromJSONByPath(body,"$.data.first_name"));
+        Assert.assertEquals("Last name should be Weaver","Weaver",JsonUtils.stringFromJSONByPath(body,"$.data.last_name"));
 
     }
 }
