@@ -121,7 +121,7 @@ public class RestTest{
 
     }
 
-    @Test
+   // @Test
     public void UPDATE() throws IOException {
         String endpoint="/api/users/2";
         String patchBody="{\"name\": \"morpheus\",\"job\": \"leader\"}";
