@@ -83,9 +83,9 @@ public class RestTest{
 
         //TODO: Избавится он хедеров в тесте добавив методы с хедерами по умолчанию в класс HttpClientHelper
         //Создаём переменую headers типа Map
-       // Map<String, String> headers=new HashMap<>();
+       //Map<String, String> headers=new HashMap<>();
         //Добавляем в headers наш заголовок
-       // headers.put("User-Agent", "My-Test-User-Agent");
+        //headers.put("User-Agent", "My-Test-User-Agent");
 
         //создаём тело запроса
         String requestBody="{\"name\": \"morpheus\",\"job\": \"leader\"}";
@@ -128,12 +128,12 @@ public class RestTest{
         HttpResponse patch = HttpClientHelper.patch(URL + endpoint, patchBody);
 
         //Конвертируем входящий поток тела ответа в строку
-        String body=HttpClientHelper.getBodyFromResponse( patch);
+        String body=HttpClientHelper.getBodyFromResponse(patch);
         System.out.println(body);
-        int statusCode = ( patch).getStatusLine().getStatusCode();
+        int statusCode = (patch).getStatusLine().getStatusCode();
         Assert.assertEquals("Response status code should be 200", 200, statusCode);
         String dateStr=JsonUtils.stringFromJSONByPath(body,"$.updatedAt");
-        Date date=dateStr //|сконвертировать к данным
+        String date=dateStr; //|сконвертировать к данным
         Assert.assertEquals("Name should be zion morpheus","morpheus",JsonUtils.stringFromJSONByPath(body,"$.updatedAt"));
 
     }

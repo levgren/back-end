@@ -2,9 +2,7 @@ package com.brainacad;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPatch;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
@@ -95,7 +93,7 @@ public class HttpClientHelper {
     public static HttpResponse patch(String endpointUrl, String body) throws IOException {
 
         Map<String, String> headers=new HashMap<>();
-        headers.put("name-morpheus", "job-leader");
+        headers.put("2019-02-01T11:36:22.621Z", "job-leader");
 
         return patch(endpointUrl, body, headers );
     }
@@ -120,6 +118,62 @@ public class HttpClientHelper {
         //возвращаем response
         return response;
     }
+ public static HttpResponse put (String endpointUrl, String body) throws IOException {
+
+        Map<String, String> headers=new HashMap<>();
+        headers.put("name-morpheus", "job-leader");
+
+        return patch(endpointUrl, body, headers );
+    }
+
+    public static HttpResponse put(String endpointUrl, String body, Map<String, String> headers) throws IOException{
+        //Создаём экземпляр HTTP клиента
+        HttpClient client = HttpClientBuilder.create().build();
+        //Создаём HTTP POST запрос из URL и параметров
+        HttpPut put = new HttpPut(endpointUrl);
+
+        //добавляем в запрос необходимые хедеры
+        for(String headerKey:headers.keySet()) {
+            put.addHeader(headerKey, headers.get(headerKey));
+        }
+
+        //добавляем к запросу тело запроса
+        put.setEntity(new StringEntity(body));
+
+        //выполняем запрос в HTTP клиенте и получаем ответ
+        HttpResponse response = client.execute(put);
+
+        //возвращаем response
+        return response;
+    }
+ /*public static HttpResponse delete (String endpointUrl, String body) throws IOException {
+
+        Map<String, String> headers=new HashMap<>();
+        headers.put("name-morpheus", "job-leader");
+
+        return patch(endpointUrl, body, headers );
+    }
+
+    public static HttpResponse delete (String endpointUrl, String body, Map<String, String> headers) throws IOException{
+        //Создаём экземпляр HTTP клиента
+        HttpClient client = HttpClientBuilder.create().build();
+        //Создаём HTTP POST запрос из URL и параметров
+        HttpDelete delete = new HttpDelete(endpointUrl);
+
+        //добавляем в запрос необходимые хедеры
+        for(String headerKey:headers.keySet()) {
+            delete.addHeader(headerKey, headers.get(headerKey));
+        }
+
+        //добавляем к запросу тело запроса
+        get.setEntity(new StringEntity(body));
+
+        //выполняем запрос в HTTP клиенте и получаем ответ
+        HttpResponse response = client.execute(delete);
+
+        //возвращаем response
+        return response;
+    }*/
 
     //TODO: допишите методы для запросов PUT, PATCH и DELETE
 }
