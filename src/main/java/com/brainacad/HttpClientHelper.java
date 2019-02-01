@@ -1,5 +1,6 @@
 package com.brainacad;
 
+import io.qameta.allure.Allure;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
@@ -27,6 +28,7 @@ public class HttpClientHelper {
 
     //REST GET запрос
     public static HttpResponse get(String endpointUrl, String parameters, Map<String, String> headers) throws IOException {
+        Allure.addAttachment("Get parameters","Endpoint URL: "+endpointUrl+" Parameters: "+parameters);
         //Создаём экземпляр HTTP клиента
         HttpClient client = HttpClientBuilder.create().build();
         //Создаём HTTP GET запрос из URL и параметров
@@ -40,6 +42,8 @@ public class HttpClientHelper {
         //выполняем запрос в HTTP клиенте и получаем ответ
         HttpResponse response = client.execute(request);
 
+        Allure.addAttachment("GET Response status code", "Status code:"+response.getStatusLine().getStatusCode());
+        Allure.addAttachment("GET Response body", getBodyFromResponse(response));
         //возвращаем response
         return response;
     }

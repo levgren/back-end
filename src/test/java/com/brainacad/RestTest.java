@@ -1,5 +1,6 @@
 package com.brainacad;
 
+import io.qameta.allure.Allure;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPatch;
 import org.junit.Assert;
@@ -17,7 +18,6 @@ public class RestTest{
     @Test//GET метод
     public void checkGetResponseStatusCode() throws IOException {
         String endpoint="/api/users";
-
         //TODO: Избавится он хедеров в тесте добавив методы с хедерами по умолчанию в класс HttpClientHelper
         //Создаём переменую headers типа Map
        // Map<String, String> headers=new HashMap<>();
@@ -133,7 +133,7 @@ public class RestTest{
         int statusCode = (patch).getStatusLine().getStatusCode();
         Assert.assertEquals("Response status code should be 200", 200, statusCode);
         String dateStr=JsonUtils.stringFromJSONByPath(body,"$.updatedAt");
-        String date=dateStr; //|сконвертировать к данным
+        String date = dateStr; //|сконвертировать к данным
         Assert.assertEquals("Name should be zion morpheus","morpheus",JsonUtils.stringFromJSONByPath(body,"$.updatedAt"));
 
     }
