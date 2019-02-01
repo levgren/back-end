@@ -103,7 +103,7 @@ public class RestTest{
     //TODO: напишите по тесткейсу на каждый вариант запроса на сайте https://reqres.in
     //TODO: в тескейсах проверьте Result Code и несколько параметров из JSON ответа (если он есть)
 
-    @Test//GET метод
+    //@Test//GET метод
     public void SingleUser() throws IOException {
         String endpoint="/api/users/2";
 
